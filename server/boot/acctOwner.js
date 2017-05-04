@@ -7,7 +7,7 @@ module.exports = function(app) {
       return process.nextTick(() => cb(null, false));
     }
 
-    if (context.modelName !== 'account' || context.modelName !== 'transaction') {
+    if (context.modelName !== 'Account' && context.modelName !== 'Transaction') {
       return process.nextTick(() => cb(null, false));
     }
 
@@ -18,10 +18,8 @@ module.exports = function(app) {
       if(!person) {
         return cb(new Error('No user found by provided token'));
       }
-
-      if (context.modelName === 'account' && person.accountId === context.modelId) {
-        return cb(null, true);
-      } else if (context.modelName === 'transaction' && person.accountId === context.accountId) {
+      
+      if (context.modelName === 'Account' && person.accountId.toString() === context.modelId.toString()) {
         return cb(null, true);
       } else {
         return cb(null, false);
