@@ -1,0 +1,69 @@
+{
+  "name": "Transaction",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "amount": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "date": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
+    },
+    "description": {
+      "type": "string"
+    },
+    "createTime": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
+    },
+    "category": {
+      "type": "string",
+      "required": true,
+      "default": "other"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "creator": {
+      "type": "hasOne",
+      "model": "Person",
+      "foreignKey": "creatorId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "acctOwner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "acctOwner",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

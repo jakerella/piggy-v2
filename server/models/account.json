@@ -17,6 +17,10 @@
     "people": {
       "type": "hasMany",
       "model": "Person"
+    },
+    "transactions": {
+      "type": "hasMany",
+      "model": "Transaction"
     }
   },
   "acls": [
