@@ -18,6 +18,11 @@
     "email": {
       "type": "string",
       "required": false
+    },
+    "createTime": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
     }
   },
   "validations": [],

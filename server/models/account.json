@@ -10,6 +10,11 @@
       "type": "string",
       "required": true,
       "default": "Piggy Bank"
+    },
+    "createTime": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
     }
   },
   "validations": [],
