@@ -1,4 +1,8 @@
 {
+  "temp": {
+    "name": "temp",
+    "connector": "memory"
+  },
   "db": {
     "url": "",
     "name": "db",
