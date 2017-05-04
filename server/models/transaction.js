@@ -35,7 +35,7 @@ module.exports = function(Transaction) {
                 return cb(err);
             }
 
-            findAccountIdForPerson(context.accessToken.userId)
+            return findAccountIdForPerson(context.accessToken.userId)
                 .then(function(accountId) {
                     if (!filter) {
                         filter = { where: { accountId: accountId } };
@@ -44,7 +44,7 @@ module.exports = function(Transaction) {
                     }
                     console.log('added account filter:', JSON.stringify(filter));
 
-                    find.apply(that, [filter, context, cb]);
+                    return find.apply(that, [filter, context, cb]);
                 })
                 .catch(cb);
         };
@@ -61,10 +61,10 @@ module.exports = function(Transaction) {
                 return cb(err);
             }
 
-            findAccountIdForPerson(context.accessToken.userId)
+            return findAccountIdForPerson(context.accessToken.userId)
                 .then(function(accountId) {
                     data.accountId = accountId;
-                    create.apply(that, [data, context, cb]);
+                    return create.apply(that, [data, context, cb]);
                 })
                 .catch(cb);
         };

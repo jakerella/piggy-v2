@@ -11,19 +11,18 @@ module.exports = function(app) {
       return process.nextTick(() => cb(null, false));
     }
 
-    app.models.Person.findById(userId, function(err, person) {
-      if(err) {
-        return cb(err);
-      }
-      if(!person) {
-        return cb(new Error('No user found by provided token'));
-      }
-      
-      if (context.modelName === 'Account' && person.accountId.toString() === context.modelId.toString()) {
-        return cb(null, true);
-      } else {
-        return cb(null, false);
-      }
-    });
+    app.models.Person.findById(userId)
+      .then(function(person) {
+        if(!person) {
+          throw new Error('No user found by provided token');
+        }
+
+        if (context.modelName === 'Account' && person.accountId.toString() === context.modelId.toString()) {
+          return cb(null, true);
+        } else {
+          return cb(null, false);
+        }
+      })
+      .catch(cb);
   });
 };
